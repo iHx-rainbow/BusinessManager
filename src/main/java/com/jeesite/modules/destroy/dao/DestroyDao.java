@@ -10,7 +10,7 @@ import com.jeesite.modules.destroy.entity.Destroy;
 /**
  * destroyDAO接口
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @MyBatisDao
 public interface DestroyDao extends CrudDao<Destroy> {

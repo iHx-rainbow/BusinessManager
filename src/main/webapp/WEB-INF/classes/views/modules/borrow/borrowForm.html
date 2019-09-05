@@ -17,56 +17,37 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('borrower')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="borrower" maxlength="500" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('loginid')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('登录ID')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="loginid" maxlength="100" class="form-control digits"/>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('archiveid')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('档案ID')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="archiveid" maxlength="100" class="form-control digits"/>
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('borrowtime')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="borrowtime" maxlength="100" class="form-control"/>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('endtime')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('借出时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="endtime" maxlength="100" class="form-control"/>
+								<#form:input path="borrowtime" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('returntime')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('归还时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="returntime" maxlength="100" class="form-control"/>
 							</div>
@@ -77,9 +58,30 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('returnloginid')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('归还期限')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="endtime" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('归还备注')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="returnloginid" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('借阅人')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="borrower" maxlength="500" class="form-control"/>
 							</div>
 						</div>
 					</div>

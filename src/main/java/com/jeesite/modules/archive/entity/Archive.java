@@ -13,7 +13,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * archiveEntity
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @Table(name="archive", alias="a", columns={
 		@Column(name="archiveid", attrName="archiveid", label="档案编号", isPK=true),

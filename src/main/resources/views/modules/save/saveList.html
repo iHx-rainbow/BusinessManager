@@ -1,0 +1,93 @@
+<% layout('/layouts/default.html', {title: '存档点管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('存档点管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('save:save:edit')){ %>
+					<a href="${ctx}/save/save/form" class="btn btn-default btnTool" title="${text('新增存档点')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${save}" action="${ctx}/save/save/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('存档点名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="savename" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('存档地址')}：</label>
+					<div class="control-inline">
+						<#form:input path="saveaddress" maxlength="500" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('联系人')}：</label>
+					<div class="control-inline">
+						<#form:input path="linker" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('联系电话')}：</label>
+					<div class="control-inline">
+						<#form:input path="telephone" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('传真')}：</label>
+					<div class="control-inline">
+						<#form:input path="fax" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('备注')}：</label>
+					<div class="control-inline">
+						<#form:input path="remark" maxlength="500" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text("存档点ID")}', name:'saveid', index:'a.saveid', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/save/save/form?pidJeesite='+row.pidJeesite+'" class="btnList" data-title="${text("编辑存档点")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("存档点名称")}', name:'savename', index:'a.savename', width:150, align:"left"},
+		{header:'${text("存档地址")}', name:'saveaddress', index:'a.saveaddress', width:150, align:"left"},
+		{header:'${text("联系人")}', name:'linker', index:'a.linker', width:150, align:"left"},
+		{header:'${text("联系电话")}', name:'telephone', index:'a.telephone', width:150, align:"left"},
+		{header:'${text("传真")}', name:'fax', index:'a.fax', width:150, align:"left"},
+		{header:'${text("备注")}', name:'remark', index:'a.remark', width:150, align:"left"},
+		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('save:save:edit')){ %>
+				actions.push('<a href="${ctx}/save/save/form?pidJeesite='+row.pidJeesite+'" class="btnList" title="${text("编辑存档点")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/save/save/delete?pidJeesite='+row.pidJeesite+'" class="btnList" title="${text("删除存档点")}" data-confirm="${text("确认要删除该存档点吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

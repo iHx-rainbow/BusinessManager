@@ -16,45 +16,15 @@
 			<#form:form id="searchForm" model="${borrow}" action="${ctx}/borrow/borrow/listData" method="post" class="form-inline hide"
 					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
 				<div class="form-group">
-					<label class="control-label">${text('borrower')}：</label>
-					<div class="control-inline">
-						<#form:input path="borrower" maxlength="500" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('loginid')}：</label>
-					<div class="control-inline">
-						<#form:input path="loginid" maxlength="100" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('archiveid')}：</label>
+					<label class="control-label">${text('档案ID')}：</label>
 					<div class="control-inline">
 						<#form:input path="archiveid" maxlength="100" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('borrowtime')}：</label>
+					<label class="control-label">${text('借阅人')}：</label>
 					<div class="control-inline">
-						<#form:input path="borrowtime" maxlength="100" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('endtime')}：</label>
-					<div class="control-inline">
-						<#form:input path="endtime" maxlength="100" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('returntime')}：</label>
-					<div class="control-inline">
-						<#form:input path="returntime" maxlength="100" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('returnloginid')}：</label>
-					<div class="control-inline">
-						<#form:input path="returnloginid" maxlength="100" class="form-control width-120"/>
+						<#form:input path="borrower" maxlength="500" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -73,20 +43,19 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("borrower")}', name:'borrower', index:'a.borrower', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/borrow/borrow/form?borrowid='+row.borrowid+'" class="btnList" data-title="${text("编辑借阅")}">'+(val||row.id)+'</a>';
+		{header:'${text("档案ID")}', name:'archiveid', index:'a.archiveid', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/borrow/borrow/form?borrowPid='+row.borrowPid+'" class="btnList" data-title="${text("编辑借阅")}">'+(val||row.id)+'</a>';
 		}},
-		{header:'${text("loginid")}', name:'loginid', index:'a.loginid', width:150, align:"center"},
-		{header:'${text("archiveid")}', name:'archiveid', index:'a.archiveid', width:150, align:"center"},
-		{header:'${text("borrowtime")}', name:'borrowtime', index:'a.borrowtime', width:150, align:"left"},
-		{header:'${text("endtime")}', name:'endtime', index:'a.endtime', width:150, align:"left"},
-		{header:'${text("returntime")}', name:'returntime', index:'a.returntime', width:150, align:"left"},
-		{header:'${text("returnloginid")}', name:'returnloginid', index:'a.returnloginid', width:150, align:"left"},
+		{header:'${text("借出时间")}', name:'borrowtime', index:'a.borrowtime', width:150, align:"center"},
+		{header:'${text("归还时间")}', name:'returntime', index:'a.returntime', width:150, align:"left"},
+		{header:'${text("归还期限")}', name:'endtime', index:'a.endtime', width:150, align:"center"},
+		{header:'${text("归还备注")}', name:'returnloginid', index:'a.returnloginid', width:150, align:"left"},
+		{header:'${text("借阅人")}', name:'borrower', index:'a.borrower', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('borrow:borrow:edit')){ %>
-				actions.push('<a href="${ctx}/borrow/borrow/form?borrowid='+row.borrowid+'" class="btnList" title="${text("编辑借阅")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				actions.push('<a href="${ctx}/borrow/borrow/delete?borrowid='+row.borrowid+'" class="btnList" title="${text("删除借阅")}" data-confirm="${text("确认要删除该借阅吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/borrow/borrow/form?borrowPid='+row.borrowPid+'" class="btnList" title="${text("编辑借阅")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/borrow/borrow/delete?borrowPid='+row.borrowPid+'" class="btnList" title="${text("删除借阅")}" data-confirm="${text("确认要删除该借阅吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}

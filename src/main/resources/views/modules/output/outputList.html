@@ -1,0 +1,129 @@
+<% layout('/layouts/default.html', {title: '导出查询', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('导出查询')}
+
+			</div>
+			
+			
+			<div>
+
+			</div>
+			
+			
+			<div class="box-tools pull-right">
+				
+				
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				
+				<form action="${ctx}/output/output/Output" method="get">
+				<input class="btn btn-primary btn-sm" type="submit" value="导出" />
+				</form>
+			</div>
+			
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${output}" action="${ctx}/output/output/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('档案类型')}：</label>
+					<div class="control-inline">
+						<#form:input path="typeid" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('存档点')}：</label>
+					<div class="control-inline">
+						<#form:input path="saveid" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('档案标题')}：</label>
+					<div class="control-inline">
+						<#form:input path="title" maxlength="150" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('内容描述')}：</label>
+					<div class="control-inline">
+						<#form:input path="content" maxlength="500" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('观察、评论')}：</label>
+					<div class="control-inline">
+						<#form:input path="remark" maxlength="500" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('建档用户')}：</label>
+					<div class="control-inline">
+						<#form:input path="creater" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('建档日期')}：</label>
+					<div class="control-inline">
+						<#form:input path="createtime" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('修改用户')}：</label>
+					<div class="control-inline">
+						<#form:input path="lastmodiuser" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('修改日期')}：</label>
+					<div class="control-inline">
+						<#form:input path="lastmoditime" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('安全级别')}：</label>
+					<div class="control-inline">
+						<#form:input path="levelid" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text("档案类型")}', name:'typeid', index:'a.typeid', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/output/output/form?archiveid='+row.archiveid+'" class="btnList" data-title="${text("查看导出")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("存档点")}', name:'saveid', index:'a.saveid', width:150, align:"center"},
+		{header:'${text("档案标题")}', name:'title', index:'a.title', width:150, align:"left"},
+		{header:'${text("内容描述")}', name:'content', index:'a.content', width:150, align:"left"},
+		{header:'${text("观察、评论")}', name:'remark', index:'a.remark', width:150, align:"left"},
+		{header:'${text("建档用户")}', name:'creater', index:'a.creater', width:150, align:"center"},
+		{header:'${text("建档日期")}', name:'createtime', index:'a.createtime', width:150, align:"left"},
+		{header:'${text("修改用户")}', name:'lastmodiuser', index:'a.lastmodiuser', width:150, align:"left"},
+		{header:'${text("修改日期")}', name:'lastmoditime', index:'a.lastmoditime', width:150, align:"left"},
+		{header:'${text("安全级别")}', name:'levelid', index:'a.levelid', width:150, align:"center"},
+		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			actions.push('<a href="${ctx}/output/output/form?archiveid='+row.archiveid+'" class="btnList" title="${text("查看导出")}"><i class="fa fa-file-text-o"></i></a>&nbsp;');
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

@@ -25,7 +25,7 @@ import com.jeesite.modules.borrow.service.BorrowService;
 /**
  * borrowController
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @Controller
 @RequestMapping(value = "${adminPath}/borrow/borrow")
@@ -38,8 +38,8 @@ public class BorrowController extends BaseController {
 	 * 获取数据
 	 */
 	@ModelAttribute
-	public Borrow get(String borrowid, boolean isNewRecord) {
-		return borrowService.get(borrowid, isNewRecord);
+	public Borrow get(String borrowPid, boolean isNewRecord) {
+		return borrowService.get(borrowPid, isNewRecord);
 	}
 	
 	/**

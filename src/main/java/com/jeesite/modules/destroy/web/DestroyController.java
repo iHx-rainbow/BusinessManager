@@ -25,7 +25,7 @@ import com.jeesite.modules.destroy.service.DestroyService;
 /**
  * destroyController
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @Controller
 @RequestMapping(value = "${adminPath}/destroy/destroy")

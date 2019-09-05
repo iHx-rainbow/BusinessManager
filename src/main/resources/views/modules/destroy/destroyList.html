@@ -16,31 +16,31 @@
 			<#form:form id="searchForm" model="${destroy}" action="${ctx}/destroy/destroy/listData" method="post" class="form-inline hide"
 					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
 				<div class="form-group">
-					<label class="control-label">${text('archiveid')}：</label>
+					<label class="control-label">${text('档案ID')}：</label>
 					<div class="control-inline">
 						<#form:input path="archiveid" maxlength="100" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('loginid')}：</label>
+					<label class="control-label">${text('登录ID')}：</label>
 					<div class="control-inline">
 						<#form:input path="loginid" maxlength="100" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('destroytime')}：</label>
+					<label class="control-label">${text('销毁时间')}：</label>
 					<div class="control-inline">
 						<#form:input path="destroytime" maxlength="100" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('reason')}：</label>
+					<label class="control-label">${text('销毁原因')}：</label>
 					<div class="control-inline">
 						<#form:input path="reason" maxlength="100" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('remark')}：</label>
+					<label class="control-label">${text('是否审核')}：</label>
 					<div class="control-inline">
 						<#form:input path="remark" maxlength="100" class="form-control width-120"/>
 					</div>
@@ -61,13 +61,13 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("archiveid")}', name:'archiveid', index:'a.archiveid', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+		{header:'${text("档案ID")}', name:'archiveid', index:'a.archiveid', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/destroy/destroy/form?destroyid='+row.destroyid+'" class="btnList" data-title="${text("编辑销毁")}">'+(val||row.id)+'</a>';
 		}},
-		{header:'${text("loginid")}', name:'loginid', index:'a.loginid', width:150, align:"center"},
-		{header:'${text("destroytime")}', name:'destroytime', index:'a.destroytime', width:150, align:"left"},
-		{header:'${text("reason")}', name:'reason', index:'a.reason', width:150, align:"left"},
-		{header:'${text("remark")}', name:'remark', index:'a.remark', width:150, align:"left"},
+		{header:'${text("登录ID")}', name:'loginid', index:'a.loginid', width:150, align:"center"},
+		{header:'${text("销毁时间")}', name:'destroytime', index:'a.destroytime', width:150, align:"left"},
+		{header:'${text("销毁原因")}', name:'reason', index:'a.reason', width:150, align:"left"},
+		{header:'${text("是否审核")}', name:'remark', index:'a.remark', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('destroy:destroy:edit')){ %>

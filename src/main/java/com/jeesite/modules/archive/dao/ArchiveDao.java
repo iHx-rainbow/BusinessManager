@@ -10,7 +10,7 @@ import com.jeesite.modules.archive.entity.Archive;
 /**
  * archiveDAO接口
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @MyBatisDao
 public interface ArchiveDao extends CrudDao<Archive> {

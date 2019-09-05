@@ -13,26 +13,26 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * destroyEntity
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @Table(name="destroy", alias="a", columns={
-		@Column(name="destroyid", attrName="destroyid", label="destroyid", isPK=true),
-		@Column(name="archiveid", attrName="archiveid", label="archiveid"),
-		@Column(name="loginid", attrName="loginid", label="loginid"),
-		@Column(name="destroytime", attrName="destroytime", label="destroytime"),
-		@Column(name="reason", attrName="reason", label="reason"),
-		@Column(name="remark", attrName="remark", label="remark"),
+		@Column(name="destroyid", attrName="destroyid", label="销毁", isPK=true),
+		@Column(name="archiveid", attrName="archiveid", label="档案ID"),
+		@Column(name="loginid", attrName="loginid", label="登录ID"),
+		@Column(name="destroytime", attrName="destroytime", label="销毁时间"),
+		@Column(name="reason", attrName="reason", label="销毁原因"),
+		@Column(name="remark", attrName="remark", label="是否审核"),
 	}, orderBy="a.destroyid DESC"
 )
 public class Destroy extends DataEntity<Destroy> {
 	
 	private static final long serialVersionUID = 1L;
-	private Long destroyid;		// destroyid
-	private Long archiveid;		// archiveid
-	private Long loginid;		// loginid
-	private String destroytime;		// destroytime
-	private String reason;		// reason
-	private String remark;		// remark
+	private String destroyid;		// 销毁
+	private Long archiveid;		// 档案ID
+	private Long loginid;		// 登录ID
+	private String destroytime;		// 销毁时间
+	private String reason;		// 销毁原因
+	private String remark;		// 是否审核
 	
 	public Destroy() {
 		this(null);
@@ -42,11 +42,11 @@ public class Destroy extends DataEntity<Destroy> {
 		super(id);
 	}
 	
-	public Long getDestroyid() {
+	public String getDestroyid() {
 		return destroyid;
 	}
 
-	public void setDestroyid(Long destroyid) {
+	public void setDestroyid(String destroyid) {
 		this.destroyid = destroyid;
 	}
 	
@@ -66,7 +66,7 @@ public class Destroy extends DataEntity<Destroy> {
 		this.loginid = loginid;
 	}
 	
-	@Length(min=0, max=100, message="destroytime长度不能超过 100 个字符")
+	@Length(min=0, max=100, message="销毁时间长度不能超过 100 个字符")
 	public String getDestroytime() {
 		return destroytime;
 	}
@@ -75,7 +75,7 @@ public class Destroy extends DataEntity<Destroy> {
 		this.destroytime = destroytime;
 	}
 	
-	@Length(min=0, max=100, message="reason长度不能超过 100 个字符")
+	@Length(min=0, max=100, message="销毁原因长度不能超过 100 个字符")
 	public String getReason() {
 		return reason;
 	}
@@ -84,7 +84,7 @@ public class Destroy extends DataEntity<Destroy> {
 		this.reason = reason;
 	}
 	
-	@Length(min=0, max=100, message="remark长度不能超过 100 个字符")
+	@Length(min=0, max=100, message="是否审核长度不能超过 100 个字符")
 	public String getRemark() {
 		return remark;
 	}

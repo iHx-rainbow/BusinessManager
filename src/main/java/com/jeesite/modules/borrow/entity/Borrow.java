@@ -3,6 +3,10 @@
  */
 package com.jeesite.modules.borrow.entity;
 
+import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeesite.common.entity.DataEntity;
@@ -13,30 +17,32 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * borrowEntity
  * @author caoyu
- * @version 2019-09-04
+ * @version 2019-09-05
  */
 @Table(name="borrow", alias="a", columns={
-		@Column(name="borrowid", attrName="borrowid", label="borrowid", isPK=true),
-		@Column(name="borrower", attrName="borrower", label="borrower"),
-		@Column(name="loginid", attrName="loginid", label="loginid"),
-		@Column(name="archiveid", attrName="archiveid", label="archiveid"),
-		@Column(name="borrowtime", attrName="borrowtime", label="borrowtime"),
-		@Column(name="endtime", attrName="endtime", label="endtime"),
-		@Column(name="returntime", attrName="returntime", label="returntime"),
-		@Column(name="returnloginid", attrName="returnloginid", label="returnloginid"),
-	}, orderBy="a.borrowid DESC"
+		@Column(name="borrowid", attrName="borrowid", label="借阅ID", isUpdate=false, isQuery=false),
+		@Column(name="loginid", attrName="loginid", label="登录ID", isQuery=false),
+		@Column(name="archiveid", attrName="archiveid", label="档案ID"),
+		@Column(name="borrowtime", attrName="borrowtime", label="借出时间", isQuery=false),
+		@Column(name="returntime", attrName="returntime", label="归还时间", isQuery=false),
+		@Column(name="endtime", attrName="endtime", label="归还期限", isQuery=false),
+		@Column(name="returnloginid", attrName="returnloginid", label="归还备注", isQuery=false),
+		@Column(name="borrower", attrName="borrower", label="借阅人"),
+		@Column(name="borrow_pid", attrName="borrowPid", label="borrow_pid", isPK=true),
+	}, orderBy="a.borrow_pid DESC"
 )
 public class Borrow extends DataEntity<Borrow> {
 	
 	private static final long serialVersionUID = 1L;
-	private Long borrowid;		// borrowid
-	private String borrower;		// borrower
-	private Long loginid;		// loginid
-	private Long archiveid;		// archiveid
-	private String borrowtime;		// borrowtime
-	private String endtime;		// endtime
-	private String returntime;		// returntime
-	private String returnloginid;		// returnloginid
+	private Long borrowid;		// 借阅ID
+	private Long loginid;		// 登录ID
+	private Long archiveid;		// 档案ID
+	private Date borrowtime;		// 借出时间
+	private String returntime;		// 归还时间
+	private Date endtime;		// 归还期限
+	private String returnloginid;		// 归还备注
+	private String borrower;		// 借阅人
+	private String borrowPid;		// borrow_pid
 	
 	public Borrow() {
 		this(null);
@@ -52,15 +58,6 @@ public class Borrow extends DataEntity<Borrow> {
 
 	public void setBorrowid(Long borrowid) {
 		this.borrowid = borrowid;
-	}
-	
-	@Length(min=0, max=500, message="borrower长度不能超过 500 个字符")
-	public String getBorrower() {
-		return borrower;
-	}
-
-	public void setBorrower(String borrower) {
-		this.borrower = borrower;
 	}
 	
 	public Long getLoginid() {
@@ -79,25 +76,16 @@ public class Borrow extends DataEntity<Borrow> {
 		this.archiveid = archiveid;
 	}
 	
-	@Length(min=0, max=100, message="borrowtime长度不能超过 100 个字符")
-	public String getBorrowtime() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getBorrowtime() {
 		return borrowtime;
 	}
 
-	public void setBorrowtime(String borrowtime) {
+	public void setBorrowtime(Date borrowtime) {
 		this.borrowtime = borrowtime;
 	}
 	
-	@Length(min=0, max=100, message="endtime长度不能超过 100 个字符")
-	public String getEndtime() {
-		return endtime;
-	}
-
-	public void setEndtime(String endtime) {
-		this.endtime = endtime;
-	}
-	
-	@Length(min=0, max=100, message="returntime长度不能超过 100 个字符")
+	@Length(min=0, max=100, message="归还时间长度不能超过 100 个字符")
 	public String getReturntime() {
 		return returntime;
 	}
@@ -106,13 +94,39 @@ public class Borrow extends DataEntity<Borrow> {
 		this.returntime = returntime;
 	}
 	
-	@Length(min=0, max=100, message="returnloginid长度不能超过 100 个字符")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(Date endtime) {
+		this.endtime = endtime;
+	}
+	
+	@Length(min=0, max=100, message="归还备注长度不能超过 100 个字符")
 	public String getReturnloginid() {
 		return returnloginid;
 	}
 
 	public void setReturnloginid(String returnloginid) {
 		this.returnloginid = returnloginid;
+	}
+	
+	@Length(min=0, max=500, message="借阅人长度不能超过 500 个字符")
+	public String getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(String borrower) {
+		this.borrower = borrower;
+	}
+	
+	public String getBorrowPid() {
+		return borrowPid;
+	}
+
+	public void setBorrowPid(String borrowPid) {
+		this.borrowPid = borrowPid;
 	}
 	
 }
