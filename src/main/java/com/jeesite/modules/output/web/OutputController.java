@@ -146,7 +146,7 @@ public class OutputController extends BaseController {
 				}
 			}
 			
-			String fileURL ="C:\\Users\\Admin\\Desktop\\企业档案管理.xls";//path为将输出实际哪个盘下的哪个文件夹
+			String fileURL ="F:\\企业档案管理.xls";//path为将输出实际哪个盘下的哪个文件夹
 			FileOutputStream outputStream;
 			try {
 				outputStream = new FileOutputStream(fileURL);
